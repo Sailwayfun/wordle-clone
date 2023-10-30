@@ -1,10 +1,12 @@
+import Wrapper from "./components/Wrapper";
+
 function App() {
   
 
   return (
-    <>
-    <h1>Wordle</h1>
-    </>
+    <Wrapper>
+      <h1>test</h1>
+    </Wrapper>
   )
 }
 
