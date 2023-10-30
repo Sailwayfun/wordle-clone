@@ -1,11 +1,15 @@
 import Word from "./Word";
 
-const Puzzle = () => {
-    const rowCount:number = 6;
+interface PuzzleProps {
+    words: string[][];
+}
+const Puzzle = ({words}:PuzzleProps) => {
     const colCount:number = 5;
     return (
         <div className="w-full space-y-1">
-            {Array.from(Array(rowCount).keys()).map((i) => (<Word key={i} colCount={colCount}/>))}
+            {words.map((word:string[], index:number) => {
+                return <Word key={index} word={word} colCount={colCount}/>
+            })}
         </div>
     )
 };
