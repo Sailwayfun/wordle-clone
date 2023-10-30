@@ -9,7 +9,7 @@ const Piece = ({text, status}: PieceProps) => {
     `bg-[#B49F3A]` : status === "correct" ? 
     `bg-[#538d4e]` : "bg-transparent";
     return (
-        <div className={`${bgColor} border border-gray-700 aspect-square shadow rounded-sm flex justify-center items-center text-6xl font-bold`}>
+        <div className={`${bgColor} border border-gray-700 aspect-square shadow rounded-sm flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold`}>
             {text}
         </div>
     )
