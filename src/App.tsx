@@ -1,13 +1,17 @@
 import Wrapper from "./components/Wrapper";
 import Puzzle from "./components/puzzle";
+ export type PuzzlePiece = {
+    letter: string,
+    status: "absent" | "partial" | "correct" | "empty",
+  }
 function App() {
-  const dummyWords:string[][] = [
-    ["W", "A", "T", "E", "R"],
-    ["A", "F", "T", "E", "R"],
-    ["B", "R", "A", "I", "L"],
-    ["G", "R", "A", "I", "L"],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
+  const dummyWords:PuzzlePiece[][] = [
+    [{letter: "W", status: "absent"}, {letter:"A", status:"partial"}, {letter:"T", status:"absent"}, {letter:"E", status:"absent"}, {letter:"R", status:"partial"}],
+    [{letter:"A", status:"partial"}, {letter:"F", status:"absent"}, {letter:"T", status:"absent"}, {letter:"E", status:"absent"}, {letter:"R", status:"partial"}],
+    [{letter:"B", status:"absent"}, {letter:"R", status:"correct"}, {letter:"A", status:"correct"}, {letter:"I", status:"correct"}, {letter:"L", status:"correct"}],
+    [{letter:"G", status:"correct"}, {letter:"R", status:"correct"}, {letter:"A", status:"correct"}, {letter:"I", status:"correct"}, {letter:"L", status:"correct"}],
+    [{letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}],
+    [{letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}, {letter:"", status:"empty"}],
   ];
 
   return (
