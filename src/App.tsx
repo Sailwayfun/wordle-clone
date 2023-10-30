@@ -1,9 +1,6 @@
 import Wrapper from "./components/Wrapper";
 import Puzzle from "./components/puzzle";
- export type PuzzlePiece = {
-    letter: string,
-    status: "absent" | "partial" | "correct" | "empty",
-  }
+import { PuzzlePiece } from "../src/types";
 function App() {
   const dummyWords:PuzzlePiece[][] = [
     [{letter: "W", status: "absent"}, {letter:"A", status:"partial"}, {letter:"T", status:"absent"}, {letter:"E", status:"absent"}, {letter:"R", status:"partial"}],

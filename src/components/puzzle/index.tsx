@@ -1,5 +1,5 @@
 import Word from "./Word";
-import { PuzzlePiece } from "../../App";
+import { PuzzlePiece } from "../../types";
 
 interface PuzzleProps {
     words: PuzzlePiece[][];

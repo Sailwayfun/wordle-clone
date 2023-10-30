@@ -1,5 +1,5 @@
 import Piece from "./Piece";
-import { PuzzlePiece } from "../../App";
+import { PuzzlePiece } from "../../types";
 interface RowProps {
     colCount: number;
     word: PuzzlePiece[];
