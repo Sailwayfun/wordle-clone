@@ -1,11 +1,11 @@
 import Wrapper from "./components/Wrapper";
-
+import Puzzle from "./components/puzzle";
 function App() {
   
 
   return (
     <Wrapper>
-      <h1>test</h1>
+      <Puzzle />
     </Wrapper>
   )
 }
