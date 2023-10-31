@@ -1,4 +1,4 @@
-import Wrapper from "./components/Wrapper";
+import Wrapper from "./components/UI/Wrapper";
 import Puzzle from "./components/puzzle";
 import { PuzzlePiece } from "../src/types";
 function App() {
