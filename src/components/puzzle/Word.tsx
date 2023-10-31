@@ -1,4 +1,5 @@
-import Piece from "./Piece";interface RowProps {
+import Piece from "./Piece";
+interface RowProps {
     colCount: number;
     word: string[];
     answer: string[];
