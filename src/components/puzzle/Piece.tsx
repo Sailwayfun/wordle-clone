@@ -12,7 +12,7 @@ const Piece = ({text, status}: PieceProps) => {
         <div className={`${bgColor} border border-gray-700 aspect-square shadow rounded-md flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold`}>
             {text}
         </div>
-    )
+    );
 }
 
 export default Piece;

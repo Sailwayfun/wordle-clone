@@ -9,10 +9,12 @@ const Puzzle = ({words}:PuzzleProps) => {
     return (
         <div className="w-full space-y-[10px] sm:space-y-3">
             {words.map((word:PuzzlePiece[], index:number) => {
-                return <Word key={index} word={word} colCount={colCount}/>
+                return (
+                <Word key={index} word={word} colCount={colCount}/>
+                );
             })}
         </div>
-    )
+    );
 };
 
 export default Puzzle;
