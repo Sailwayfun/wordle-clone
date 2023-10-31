@@ -1,5 +1,5 @@
 import Wrapper from "./components/UI/Wrapper";
-import Puzzle from "./components/puzzle";
+import Puzzle from "./components/Puzzle";
 import { PuzzlePiece } from "../src/types";
 function App() {
   const dummyWords:PuzzlePiece[][] = [
