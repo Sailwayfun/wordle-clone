@@ -17,7 +17,7 @@ const initialState: PuzzleState = {
 
 interface Action {
     type: string;
-    payload: string[];
+    payload?: string[];
 }
 
 export default function puzzleReducer (state:PuzzleState, action:Action)  {
