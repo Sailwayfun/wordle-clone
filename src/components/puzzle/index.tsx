@@ -1,16 +1,16 @@
 import Word from "./Word";
-import { PuzzlePiece } from "../../types";
 
 interface PuzzleProps {
-    words: PuzzlePiece[][];
+    words: string[][];
+    answer: string[];
 }
-const Puzzle = ({words}:PuzzleProps) => {
+const Puzzle = ({words, answer}:PuzzleProps) => {
     const colCount:number = 5;
     return (
         <div className="w-full space-y-[10px] sm:space-y-3">
-            {words.map((word:PuzzlePiece[], index:number) => {
+            {words.map((word:string[], index:number) => {
                 return (
-                <Word key={index} word={word} colCount={colCount}/>
+                <Word key={index} word={word} colCount={colCount} answer={answer}/>
                 );
             })}
         </div>
