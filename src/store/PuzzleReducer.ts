@@ -1,26 +1,36 @@
 const rowCount:number = 6;
 const colCount:number = 5;
+export {colCount, rowCount};
 
-interface PuzzleState {
-    currentGuess:[];
+export interface State {
+    currentGuess:string[];
     currentRow:number;
-    answer:string[];
     attempts:string[][];
 }
 
-const initialState: PuzzleState = {
-    answer:["G", "R", "A", "I", "L"],
+export const initialState: State = {
     currentGuess: [],
     currentRow: 1,
     attempts: Array.from({length: rowCount}, () => Array(colCount).fill("")),
 }
 
-interface Action {
-    type: string;
-    payload?: string[];
+export interface AddGuessAction {
+  type: 'ADD_GUESS';
+  payload: string[];
 }
 
-export default function puzzleReducer (state:PuzzleState, action:Action)  {
+export interface AddRowAction {
+  type: 'ADD_ROW';
+}
+
+export interface AddAttemptAction {
+  type: 'ADD_ATTEMPT';
+  payload: string[][];
+}
+
+export type Action = AddGuessAction | AddRowAction | AddAttemptAction;
+
+export default function puzzleReducer (state:State, action:Action)  {
     switch(action.type) {
         case "ADD_GUESS":
             return {...state, currentGuess: action.payload}
