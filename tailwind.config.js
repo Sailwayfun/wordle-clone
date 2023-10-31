@@ -11,6 +11,9 @@ export default {
         "dark-gray": "#3a3a3c",
         "bronze": "#b49f3a",
         "green": "#538d4e",
+      },
+      fontFamily: {
+        "heading": ['Preahvihear', "sans-serif"]
       }
     },
   },
