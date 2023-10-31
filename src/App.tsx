@@ -14,10 +14,10 @@ function App() {
 
   return (
     <>
-    <Header />
-    <Wrapper>
-      <Puzzle words={dummyWords}/>
-    </Wrapper>
+      <Header />
+      <Wrapper>
+        <Puzzle words={dummyWords}/>
+      </Wrapper>
     </>
   );
    
