@@ -15,16 +15,16 @@ export const initialState: State = {
 }
 
 export interface AddGuessAction {
-  type: 'ADD_GUESS';
+  type: "ADD_GUESS";
   payload: string[];
 }
 
 export interface AddRowAction {
-  type: 'ADD_ROW';
+  type: "ADD_ROW";
 }
 
 export interface AddAttemptAction {
-  type: 'ADD_ATTEMPT';
+  type: "ADD_ATTEMPT";
   payload: string[][];
 }
 
