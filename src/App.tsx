@@ -19,7 +19,7 @@ function App() {
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
     }
-  }, [currentGuess]);
+  }, [currentGuess, currentRow]);
   return (
     <>
       <Header />

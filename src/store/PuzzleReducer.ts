@@ -37,7 +37,7 @@ export default function puzzleReducer (state:State, action:Action)  {
         case "ADD_ROW":
             return {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":
-            return {...state, attempts: action.payload}
+            return {...state, attempts: action.payload, currentGuess: []}
         default:
             return state;
     }
