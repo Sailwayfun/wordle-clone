@@ -15,10 +15,10 @@ function App() {
 
   return (
     <>
-    <Header />
-    <Wrapper>
-      <Puzzle words={attempts} answer={answer}/>
-    </Wrapper>
+      <Header />
+      <Wrapper>
+        <Puzzle words={attempts} answer={answer}/>
+      </Wrapper>
     </>
   );
    
