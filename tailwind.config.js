@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         "primary-black": "#121213",
+        "dark-gray": "#3a3a3c",
+        "bronze": "#b49f3a",
+        "green": "#538d4e",
       }
     },
   },
