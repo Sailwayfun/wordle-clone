@@ -14,6 +14,9 @@ function App() {
       if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key) && currentGuess.length < colCount) {
         dispatch({type: "ADD_GUESS", payload: [...currentGuess, e.key.toUpperCase()]});
       }
+      if(e.key === "Enter" && currentGuess.length === colCount) {
+        dispatch({type:"ADD_ATTEMPT", payload: [...attempts, currentGuess]});
+      }
     }
     window.addEventListener("keyup", handleKeyUp);
     return () => {
