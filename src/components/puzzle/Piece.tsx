@@ -1,6 +1,6 @@
 interface PieceProps {
     text: string;
-    status: "absent" | "partial" | "correct";
+    status: "absent" | "partial" | "correct" | "empty";
 }
 
 const Piece = ({text, status}: PieceProps) => {
