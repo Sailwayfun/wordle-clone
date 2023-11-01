@@ -18,10 +18,11 @@ export const initialState: State = {
 
 
 export default function puzzleReducer (state:State, action:Action)  {
-    const isGuessing = state.currentGuess.length < colCount;
-    const isCurrentRow = state.currentGuess.length > 0 && state.currentGuess.length < colCount;
+    const currentGuessLength = state.currentGuess.length;
+    const isGuessing = currentGuessLength < colCount;
+    const isCurrentRow = currentGuessLength > 0 && currentGuessLength < colCount;
     const isRowFull = state.currentRow === rowCount;
-    const isGuessFull = state.currentGuess.length === colCount;
+    const isGuessFull = currentGuessLength === colCount;
     const newAttempts = [...state.attempts];
     newAttempts[state.currentRow] = [...state.currentGuess];
     if(state.currentRow > rowCount) return state;
@@ -29,6 +30,10 @@ export default function puzzleReducer (state:State, action:Action)  {
         case "ADD_GUESS":
             return isGuessing ? 
             { ...state, currentGuess: [...state.currentGuess, action.payload] }: 
+            state;
+        case "REMOVE_GUESS":
+            return (currentGuessLength <= colCount && currentGuessLength > 0) ? 
+            { ...state, currentGuess: [...state.currentGuess.slice(0, -1)] }: 
             state;
         case "ADD_ROW":
             return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 

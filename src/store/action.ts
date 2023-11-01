@@ -3,6 +3,10 @@ export interface AddGuessAction {
   payload: string;
 }
 
+export interface RemoveGuessAction {
+  type: "REMOVE_GUESS";
+}
+
 export interface AddRowAction {
   type: "ADD_ROW";
 }
@@ -11,4 +15,4 @@ export interface AddAttemptAction {
   type: "ADD_ATTEMPT";
 }
 
-export type Action = AddGuessAction | AddRowAction | AddAttemptAction;
+export type Action = AddGuessAction | RemoveGuessAction | AddRowAction | AddAttemptAction;

@@ -17,6 +17,9 @@ function App() {
         dispatch({type:"ADD_ATTEMPT"});
         dispatch({type:"ADD_ROW"});
       }
+      if(e.key === "Backspace") {
+        dispatch({type:"REMOVE_GUESS"});
+      }
     }
     window.addEventListener("keyup", handleKeyUp);
     return () => {
