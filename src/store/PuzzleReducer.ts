@@ -20,7 +20,9 @@ export const initialState: State = {
 export default function puzzleReducer (state:State, action:Action)  {
     switch(action.type) {
         case "ADD_GUESS":
-            return {...state, currentGuess: [...state.currentGuess, action.payload]}
+            return state.currentGuess.length < colCount ? 
+            { ...state, currentGuess: [...state.currentGuess, action.payload] }: 
+            state;
         case "ADD_ROW":
             return {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":

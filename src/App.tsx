@@ -12,7 +12,7 @@ function App() {
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
       if(currentRow > rowCount) return;
-      if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key) && currentGuess.length < colCount) {
+      if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {
         dispatch({type: "ADD_GUESS", payload: e.key.toUpperCase()});
       }
       if(e.key === "Enter" && currentGuess.length === colCount) {
