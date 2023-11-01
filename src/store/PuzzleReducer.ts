@@ -1,3 +1,4 @@
+import { Action } from "./action";
 const rowCount:number = 6;
 const colCount:number = 5;
 export {colCount, rowCount};
@@ -14,21 +15,7 @@ export const initialState: State = {
     attempts: Array.from({length: rowCount}, () => Array(colCount).fill("")),
 }
 
-export interface AddGuessAction {
-  type: "ADD_GUESS";
-  payload: string[];
-}
 
-export interface AddRowAction {
-  type: "ADD_ROW";
-}
-
-export interface AddAttemptAction {
-  type: "ADD_ATTEMPT";
-  payload: string[][];
-}
-
-export type Action = AddGuessAction | AddRowAction | AddAttemptAction;
 
 export default function puzzleReducer (state:State, action:Action)  {
     switch(action.type) {
