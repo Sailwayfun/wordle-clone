@@ -44,7 +44,7 @@ export default function puzzleReducer (state:State, action:Action)  {
             {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":
             return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
-            isMatched ? {...state, isMatched} :
+            isMatched ? {...initialState, isMatched} :
             {...state, attempts: newAttempts, currentGuess: []}
         case "RESET":
             return initialState;
