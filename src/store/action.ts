@@ -9,7 +9,6 @@ export interface AddRowAction {
 
 export interface AddAttemptAction {
   type: "ADD_ATTEMPT";
-  payload: string[][];
 }
 
 export type Action = AddGuessAction | AddRowAction | AddAttemptAction;

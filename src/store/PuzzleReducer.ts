@@ -21,6 +21,8 @@ export default function puzzleReducer (state:State, action:Action)  {
     const isGuessing = state.currentGuess.length < colCount;
     const isRowFull = state.currentRow === rowCount;
     const isGuessFull = state.currentGuess.length === colCount;
+    const newAttempts = [...state.attempts];
+    newAttempts[state.currentRow] = [...state.currentGuess];
     if(state.currentRow > rowCount) return state;
     switch(action.type) {
         case "ADD_GUESS":
@@ -31,7 +33,7 @@ export default function puzzleReducer (state:State, action:Action)  {
             return (isRowFull && isGuessFull) ? state: 
             {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":
-            return {...state, attempts: action.payload, currentGuess: []}
+            return (isRowFull && isGuessFull) ? state: {...state, attempts: newAttempts, currentGuess: []}
         default:
             return state;
     }
