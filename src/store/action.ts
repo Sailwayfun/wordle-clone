@@ -1,6 +1,6 @@
 export interface AddGuessAction {
   type: "ADD_GUESS";
-  payload: string[];
+  payload: string;
 }
 
 export interface AddRowAction {
