@@ -21,6 +21,7 @@ export default function puzzleReducer (state:State, action:Action)  {
     const isGuessing = state.currentGuess.length < colCount;
     const isRowFull = state.currentRow === rowCount;
     const isGuessFull = state.currentGuess.length === colCount;
+    if(state.currentRow > rowCount) return state;
     switch(action.type) {
         case "ADD_GUESS":
             return isGuessing ? 
