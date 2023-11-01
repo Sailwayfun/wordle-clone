@@ -7,7 +7,7 @@ import { Action } from "./store/action";
 function App() {
   const answer:string[]=["G", "R", "A", "I", "L"];
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
-  const {attempts, currentRow, currentGuess} = state;
+  const {attempts, currentGuess} = state;
   console.log(currentGuess);
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
