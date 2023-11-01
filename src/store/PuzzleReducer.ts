@@ -8,12 +8,14 @@ export interface State {
     currentGuess:string[];
     currentRow:number;
     attempts:string[][];
+    isMatched:boolean;
 }
 
 export const initialState: State = {
     currentGuess: [],
     currentRow: 0,
     attempts: Array.from({length: rowCount}, () => Array(colCount).fill("")),
+    isMatched: false
 }
 
 
@@ -24,6 +26,7 @@ export default function puzzleReducer (state:State, action:Action)  {
     const isCurrentRow = currentGuessLength > 0 && currentGuessLength < colCount;
     const isRowFull = state.currentRow === rowCount;
     const isGuessFull = currentGuessLength === colCount;
+    const isMatched = isGuessFull && state.currentGuess.join("") === answer.join("");
     const newAttempts = [...state.attempts];
     newAttempts[state.currentRow] = [...state.currentGuess];
     if(state.currentRow > rowCount) return state;
@@ -40,7 +43,11 @@ export default function puzzleReducer (state:State, action:Action)  {
             return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
             {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":
-            return ((isRowFull && isGuessFull) || isCurrentRow) ? state: {...state, attempts: newAttempts, currentGuess: []}
+            return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
+            isMatched ? {...state, isMatched} :
+            {...state, attempts: newAttempts, currentGuess: []}
+        case "RESET":
+            return initialState;
         default:
             return state;
     }

@@ -8,6 +8,12 @@ import { answer } from "./store/puzzleReducer";
 function App() {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
   console.log(state.currentGuess);
+  useEffect(() => {
+    if(state.isMatched) {
+      dispatch({type:"RESET"});
+      alert("You win!");
+    }
+  }, [state.isMatched]);
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
       if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {

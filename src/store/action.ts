@@ -11,8 +11,12 @@ export interface AddRowAction {
   type: "ADD_ROW";
 }
 
+export interface ResetAction {
+  type: "RESET";
+}
+
 export interface AddAttemptAction {
   type: "ADD_ATTEMPT";
 }
 
-export type Action = AddGuessAction | RemoveGuessAction | AddRowAction | AddAttemptAction;
+export type Action = AddGuessAction | RemoveGuessAction | AddRowAction | AddAttemptAction | ResetAction;
