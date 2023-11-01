@@ -14,6 +14,12 @@ function App() {
       alert("You win!");
     }
   }, [state.isMatched]);
+  useEffect(() => {
+    if(state.isOver) {
+      dispatch({type:"RESET"});
+      alert("Game over!");
+    }
+  }, [state.isOver]);
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
       if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {
