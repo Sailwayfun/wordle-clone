@@ -4,8 +4,8 @@ import Header from "./components/Header";
 import { useReducer, Reducer, useEffect } from "react";
 import puzzleReducer, { initialState as initialAttempts, State } from "./store/puzzleReducer";
 import { Action } from "./store/action";
+import { answer } from "./store/puzzleReducer";
 function App() {
-  const answer:string[]=["G", "R", "A", "I", "L"];
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
   console.log(state.currentGuess);
   useEffect(() =>{

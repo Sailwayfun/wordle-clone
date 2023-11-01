@@ -2,6 +2,7 @@ import { Action } from "./action";
 const rowCount:number = 6;
 const colCount:number = 5;
 export {colCount, rowCount};
+export const answer:string[]=["G", "R", "A", "I", "L"];
 
 export interface State {
     currentGuess:string[];
