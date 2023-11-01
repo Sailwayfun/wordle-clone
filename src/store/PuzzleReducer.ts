@@ -10,7 +10,7 @@ export interface State {
 
 export const initialState: State = {
     currentGuess: [],
-    currentRow: 1,
+    currentRow: 0,
     attempts: Array.from({length: rowCount}, () => Array(colCount).fill("")),
 }
 

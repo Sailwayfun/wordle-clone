@@ -7,7 +7,7 @@ function App() {
   const answer:string[]=["G", "R", "A", "I", "L"];
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
   const {attempts, currentRow, currentGuess} = state;
-  console.log(currentGuess);
+  console.log(currentRow);
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
       if(currentRow > rowCount) return;
@@ -15,14 +15,18 @@ function App() {
         dispatch({type: "ADD_GUESS", payload: [...currentGuess, e.key.toUpperCase()]});
       }
       if(e.key === "Enter" && currentGuess.length === colCount) {
-        dispatch({type:"ADD_ATTEMPT", payload: [...attempts, currentGuess]});
+        if(currentRow === rowCount) return;
+        const newAttempts = [...attempts];
+        newAttempts[currentRow] = currentGuess;
+        dispatch({type:"ADD_ATTEMPT", payload: newAttempts});
+        dispatch({type:"ADD_ROW"});
       }
     }
     window.addEventListener("keyup", handleKeyUp);
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
     }
-  }, [currentGuess, currentRow]);
+  }, [currentGuess, currentRow, attempts]);
   return (
     <>
       <Header />
