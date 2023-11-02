@@ -5,19 +5,29 @@ import { useReducer, Reducer, useEffect } from "react";
 import puzzleReducer, { initialState as initialAttempts, State } from "./store/puzzleReducer";
 import { Action } from "./store/action";
 import { answer } from "./store/puzzleReducer";
+import toast, { Toaster } from "react-hot-toast";
 function App() {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
-  console.log(state.currentGuess);
   useEffect(() => {
     if(state.isMatched) {
       dispatch({type:"RESET"});
-      alert("You win!");
+      toast.custom((t) => (
+        <div className={`bg-gray-50 px-6 py-6 shadow-md rounded-3xl text-2xl ${
+      t.visible ? 'animate-enter' : 'animate-leave'}`}>
+          👏<span className="px-3">答對了，恭喜!</span>👏
+        </div>
+      ));
     }
   }, [state.isMatched]);
   useEffect(() => {
     if(state.isOver) {
       dispatch({type:"RESET"});
-      alert("Game over!");
+      toast.custom((t) => (
+        <div className={`bg-gray-50 px-6 py-6 shadow-md rounded-3xl text-2xl ${
+      t.visible ? 'animate-enter' : 'animate-leave'}`}>
+          😖<span className="px-3">答錯了! 再挑戰一次！</span>😖
+        </div>
+      ));
     }
   }, [state.isOver]);
   useEffect(() =>{
@@ -40,6 +50,7 @@ function App() {
   }, []);
   return (
     <>
+      <Toaster toastOptions={{duration: 200}}/>
       <Header />
       <Wrapper>
         <Puzzle words={state.attempts} answer={answer} currentGuess={state.currentGuess} currentRow={state.currentRow}/>
