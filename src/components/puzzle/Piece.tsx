@@ -8,9 +8,9 @@ const Piece = ({text, status}: PieceProps) => {
     "bg-dark-gray" : status === "partial" ? 
     "bg-bronze" : status === "correct" ? 
     "bg-green" : "bg-transparent";
-    const guessingBoder:string = status === "guessing" ? "border-1 border-gray-500" : "";
+    const guessingBorder:string = status === "guessing" ? "border-1 border-gray-500" : "";
     return (
-        <div className={`${bgColor} border border-gray-700 ${guessingBoder} aspect-square shadow rounded-md flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold`}>
+        <div className={`${bgColor} border border-gray-700 ${guessingBorder} aspect-square shadow rounded-md flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold`}>
             {text}
         </div>
     );
