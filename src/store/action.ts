@@ -6,11 +6,6 @@ export interface AddGuessAction {
 export interface RemoveGuessAction {
   type: "REMOVE_GUESS";
 }
-
-// export interface AddRowAction {
-//   type: "ADD_ROW";
-// }
-
 export interface ResetAction {
   type: "RESET";
 }
