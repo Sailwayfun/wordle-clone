@@ -37,7 +37,6 @@ function App() {
       }
       if(e.key === "Enter") {
         dispatch({type:"ADD_ATTEMPT"});
-        dispatch({type:"ADD_ROW"});
       }
       if(e.key === "Backspace") {
         dispatch({type:"REMOVE_GUESS"});

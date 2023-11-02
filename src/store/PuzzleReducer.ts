@@ -29,6 +29,7 @@ export default function puzzleReducer (state:State, action:Action)  {
     const isRowFull = state.currentRow === rowCount;
     const isGuessFull = currentGuessLength === colCount;
     const isMatched = isGuessFull && state.currentGuess.join("") === answer.join("");
+    const isOver = state.currentRow === rowCount - 1 && !isMatched;
     const newAttempts = [...state.attempts];
     newAttempts[state.currentRow] = [...state.currentGuess];
     if(state.currentRow > rowCount) return state;
@@ -41,14 +42,11 @@ export default function puzzleReducer (state:State, action:Action)  {
             return (currentGuessLength <= colCount && currentGuessLength > 0) ? 
             { ...state, currentGuess: [...state.currentGuess.slice(0, -1)] }: 
             state;
-        case "ADD_ROW":
-            return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
-            {...state, currentRow: state.currentRow + 1}
         case "ADD_ATTEMPT":
             return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
             isMatched ? {...initialState, isMatched} :
-            isRowFull ? {...initialState, isOver: true} :
-            {...state, attempts: newAttempts, currentGuess: []}
+            isOver ? {...initialState, isOver} :
+            {...state, attempts: newAttempts, currentGuess: [], currentRow: state.currentRow + 1}
         case "RESET":
             return initialState;
         default:
