@@ -47,8 +47,8 @@ Libraries
      <li>
         <p>Each game allows the player to guess 6 times at most. If the 6th guess is wrong, a toast saying "答錯了! 再挑戰一次！"  would appear; If the guess is correct, a toast saying "答對了，恭喜!" would appear.</p>
         <div style="display: flex;">
-            <img align="top" src="public/assets/correct-guess.gif" height="500px"/>
-            <img align="top" src="public/assets/wrong-guess.gif" height="500px" />
+            <img align="top" src="public/assets/correct-guess.gif" />
+            <img align="top" src="public/assets/wrong-guess.gif" />
         </div>
     </li>
 </ol>
