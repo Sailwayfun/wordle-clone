@@ -1,4 +1,4 @@
-import { Action } from "./action";
+import type { Action } from "./action";
 const rowCount:number = 6;
 const colCount:number = 5;
 export {colCount, rowCount};

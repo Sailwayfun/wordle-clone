@@ -1,9 +1,9 @@
 import Wrapper from "./components/UI/Wrapper";
 import Puzzle from "./components/Puzzle";
 import Header from "./components/Header";
-import { useReducer, Reducer, useEffect } from "react";
-import puzzleReducer, { initialState as initialAttempts, State } from "./store/puzzleReducer";
-import { Action } from "./store/action";
+import { useReducer, type Reducer, useEffect } from "react";
+import puzzleReducer, { initialState as initialAttempts, type State } from "./store/puzzleReducer";
+import type { Action } from "./store/action";
 import { answer } from "./store/puzzleReducer";
 import toast, { Toaster } from "react-hot-toast";
 function App() {
