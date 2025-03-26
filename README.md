@@ -1,5 +1,5 @@
 # Wordle Clone
-[Wordle Clone](https://wordle-sail--wordle-4lmsa6dh.web.app) is a replication of the popular word-guessing game.
+[Wordle Clone](https://wordle-sail.web.app) is a replication of the popular word-guessing game.
 
 ## About Wordle Clone
 - Accelerated UI development with ``Tailwind CSS``.
