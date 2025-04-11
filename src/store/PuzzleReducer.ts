@@ -30,23 +30,26 @@ export default function puzzleReducer (state:State, action:Action)  {
     const isGuessFull = currentGuessLength === colCount;
     const isMatched = isGuessFull && state.currentGuess.join("") === answer.join("");
     const isOver = state.currentRow === rowCount - 1 && !isMatched;
+    const canRemoveGuess = currentGuessLength <= colCount && currentGuessLength > 0;
     const newAttempts = [...state.attempts];
     newAttempts[state.currentRow] = [...state.currentGuess];
     if(state.currentRow > rowCount) return state;
     switch(action.type) {
         case "ADD_GUESS":
-            return isGuessing ? 
-            { ...state, currentGuess: [...state.currentGuess, action.payload] }: 
-            state;
+            if(isGuessing) {
+                return { ...state, currentGuess: [...state.currentGuess, action.payload] };
+            }
+            return state;
         case "REMOVE_GUESS":
-            return (currentGuessLength <= colCount && currentGuessLength > 0) ? 
-            { ...state, currentGuess: [...state.currentGuess.slice(0, -1)] }: 
-            state;
+            if(canRemoveGuess) {
+                return { ...state, currentGuess: [...state.currentGuess.slice(0, -1)] };
+            }
+            return state;
         case "ADD_ATTEMPT":
-            return ((isRowFull && isGuessFull) || isCurrentRow) ? state: 
-            isMatched ? {...initialState, isMatched} :
-            isOver ? {...initialState, isOver} :
-            {...state, attempts: newAttempts, currentGuess: [], currentRow: state.currentRow + 1}
+            if (isRowFull && isGuessFull || isCurrentRow) return state;
+            if(isMatched) return {...initialState, isMatched};
+            if(isOver) return {...initialState, isOver};
+            return {...state, attempts: newAttempts, currentGuess: [], currentRow: state.currentRow + 1}
         case "RESET":
             return initialState;
         default:
