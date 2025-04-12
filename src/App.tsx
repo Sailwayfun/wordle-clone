@@ -2,12 +2,13 @@ import Wrapper from "./components/UI/Wrapper";
 import Puzzle from "./components/Puzzle";
 import Header from "./components/Header";
 import { useReducer, type Reducer, useEffect } from "react";
-import puzzleReducer, { initialState as initialAttempts, type State } from "./store/puzzleReducer";
+import puzzleReducer, { initialState as initialAttempts, type State } from "./store/PuzzleReducer";
 import type { Action } from "./store/action";
-import { answer } from "./store/puzzleReducer";
 import toast, { Toaster } from "react-hot-toast";
+
 function App() {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
+
   useEffect(() => {
     if(state.isMatched) {
       dispatch({type:"RESET"});
@@ -19,6 +20,7 @@ function App() {
       ));
     }
   }, [state.isMatched]);
+
   useEffect(() => {
     if(state.isOver) {
       dispatch({type:"RESET"});
@@ -30,6 +32,7 @@ function App() {
       ));
     }
   }, [state.isOver]);
+
   useEffect(() =>{
     function handleKeyUp(e:KeyboardEvent) {
       if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {
@@ -47,17 +50,21 @@ function App() {
       window.removeEventListener("keyup", handleKeyUp);
     }
   }, []);
+
   return (
     <>
       <Toaster toastOptions={{duration: 200}}/>
       <Header />
       <Wrapper>
-        <Puzzle words={state.attempts} answer={answer} currentGuess={state.currentGuess} currentRow={state.currentRow}/>
+        <Puzzle 
+          words={state.attempts}
+          currentGuess={state.currentGuess}
+          currentRow={state.currentRow}
+          matchStates={state.matchStates}
+        />
       </Wrapper>
     </>
   );
-   
-    
 }
 
 export default App;
