@@ -2,7 +2,7 @@ import Wrapper from "./components/UI/Wrapper";
 import Puzzle from "./components/Puzzle";
 import Header from "./components/Header";
 import { useReducer, type Reducer, useEffect } from "react";
-import puzzleReducer, { initialState as initialAttempts, type State } from "./store/puzzleReducer";
+import puzzleReducer, { initialState as initialAttempts, type State } from "./store/PuzzleReducer";
 import type { Action } from "./store/action";
 import toast, { Toaster } from "react-hot-toast";
 
