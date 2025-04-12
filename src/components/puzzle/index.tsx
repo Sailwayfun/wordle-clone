@@ -1,5 +1,6 @@
 import Word from "./Word";
 import { colCount, type MatchState } from "../../store/PuzzleReducer";
+import { memo } from "react";
 
 interface PuzzleProps {
     words: string[][];
@@ -8,7 +9,7 @@ interface PuzzleProps {
     matchStates: MatchState[][];
 }
 
-const Puzzle = ({words, currentGuess, currentRow, matchStates}: PuzzleProps) => {
+const Puzzle = memo(function Puzzle({words, currentGuess, currentRow, matchStates}: PuzzleProps) {
     return (
         <div className="w-full space-y-[10px] sm:gap-3">
             {words.map((word: string[], rowIndex: number) => {
@@ -20,7 +21,8 @@ const Puzzle = ({words, currentGuess, currentRow, matchStates}: PuzzleProps) => 
                 
                 return (
                     <Word 
-                        key={`row-${Date.now()}-${rowIndex}`} 
+                        key={`row-${rowIndex}`}
+                        rowIndex={rowIndex}
                         word={rowContent} 
                         matchStates={rowStates}
                     />
@@ -28,6 +30,6 @@ const Puzzle = ({words, currentGuess, currentRow, matchStates}: PuzzleProps) => 
             })}
         </div>
     );
-};
+});
 
 export default Puzzle;

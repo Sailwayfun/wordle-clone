@@ -4,6 +4,12 @@ const colCount:number = 5;
 export { colCount, rowCount };
 export const answer:string[]=["A", "P", "P", "L", "E"];
 
+// Precalculate answer frequencies
+const answerFrequencies: {[key: string]: number} = answer.reduce((freq, letter) => {
+    freq[letter] = (freq[letter] || 0) + 1;
+    return freq;
+}, {} as {[key: string]: number});
+
 export type MatchState = "correct" | "partial" | "absent" | "empty" | "guessing";
 
 export interface State {
@@ -24,6 +30,38 @@ export const initialState: State = {
     matchStates: Array.from({length: rowCount}, () => Array(colCount).fill("empty")),
 }
 
+// Helper function to calculate match states for a guess
+function calculateMatchStates(guess: string[]): MatchState[] {
+    const currentRowStates = Array(colCount).fill("empty");
+    
+    if (guess.length === 0) return currentRowStates;
+    
+    // Copy frequencies for this calculation
+    const remainingFreq = {...answerFrequencies};
+    
+    // First pass: Mark correct matches
+    guess.forEach((letter, index) => {
+        if (letter === answer[index]) {
+            currentRowStates[index] = "correct";
+            remainingFreq[letter]--;
+        }
+    });
+    
+    // Second pass: Mark partial and absent matches
+    guess.forEach((letter, index) => {
+        if (currentRowStates[index] === "correct") return;
+        
+        if (remainingFreq[letter] > 0) {
+            currentRowStates[index] = "partial";
+            remainingFreq[letter]--;
+        } else {
+            currentRowStates[index] = "absent";
+        }
+    });
+    
+    return currentRowStates;
+}
+
 export default function puzzleReducer(state: State, action: Action) {
     const currentGuessLength = state.currentGuess.length;
     const isGuessing = currentGuessLength < colCount;
@@ -33,8 +71,6 @@ export default function puzzleReducer(state: State, action: Action) {
     const isMatched = isGuessFull && state.currentGuess.join("") === answer.join("");
     const isOver = state.currentRow === rowCount - 1 && !isMatched;
     const canRemoveGuess = currentGuessLength <= colCount && currentGuessLength > 0;
-    const newAttempts = [...state.attempts];
-    newAttempts[state.currentRow] = [...state.currentGuess];
 
     if(state.currentRow > rowCount) return state;
 
@@ -43,42 +79,9 @@ export default function puzzleReducer(state: State, action: Action) {
             if(!isGuessing) return state;
             
             const newGuess = [...state.currentGuess, action.payload];
-            const newMatchStates = [...state.matchStates];
-            const currentRowStates = Array(colCount).fill("empty");
-            
-            // Calculate letter frequencies in answer
-            const answerFreq = answer.reduce((freq: {[key: string]: number}, letter) => {
-                freq[letter] = (freq[letter] || 0) + 1;
-                return freq;
-            }, {});
-            
-            // First pass: Mark correct matches
-            const remainingFreq = {...answerFreq};
-            newGuess.forEach((letter, index) => {
-                if (letter === answer[index]) {
-                    currentRowStates[index] = "correct";
-                    remainingFreq[letter]--;
-                }
-            });
-            
-            // Second pass: Mark partial and absent matches
-            newGuess.forEach((letter, index) => {
-                if (currentRowStates[index] === "correct") return;
-                
-                if (remainingFreq[letter] > 0) {
-                    currentRowStates[index] = "partial";
-                    remainingFreq[letter]--;
-                } else {
-                    currentRowStates[index] = "absent";
-                }
-            });
-            
-            // Fill remaining positions with "empty"
-            for (let i = newGuess.length; i < colCount; i++) {
-                currentRowStates[i] = "empty";
-            }
-            
-            newMatchStates[state.currentRow] = currentRowStates;
+            const newMatchStates = state.matchStates.map((row, index) => 
+                index === state.currentRow ? calculateMatchStates(newGuess) : row
+            );
             
             return {
                 ...state,
@@ -87,58 +90,37 @@ export default function puzzleReducer(state: State, action: Action) {
             };
         }
 
-        case "REMOVE_GUESS":
-            if(canRemoveGuess) {
-                const newMatchStates = [...state.matchStates];
-                const currentRowStates = Array(colCount).fill("empty");
-                
-                // Recalculate states for remaining letters
-                const remainingGuess = state.currentGuess.slice(0, -1);
-                
-                if (remainingGuess.length > 0) {
-                    // Calculate letter frequencies in answer
-                    const answerFreq = answer.reduce((freq: {[key: string]: number}, letter) => {
-                        freq[letter] = (freq[letter] || 0) + 1;
-                        return freq;
-                    }, {});
-                    
-                    // First pass: Mark correct matches
-                    const remainingFreq = {...answerFreq};
-                    remainingGuess.forEach((letter, index) => {
-                        if (letter === answer[index]) {
-                            currentRowStates[index] = "correct";
-                            remainingFreq[letter]--;
-                        }
-                    });
-                    
-                    // Second pass: Mark partial and absent matches
-                    remainingGuess.forEach((letter, index) => {
-                        if (currentRowStates[index] === "correct") return;
-                        
-                        if (remainingFreq[letter] > 0) {
-                            currentRowStates[index] = "partial";
-                            remainingFreq[letter]--;
-                        } else {
-                            currentRowStates[index] = "absent";
-                        }
-                    });
-                }
-                
-                newMatchStates[state.currentRow] = currentRowStates;
-                
-                return {
-                    ...state,
-                    currentGuess: remainingGuess,
-                    matchStates: newMatchStates
-                };
-            }
-            return state;
+        case "REMOVE_GUESS": {
+            if(!canRemoveGuess) return state;
+            
+            const remainingGuess = state.currentGuess.slice(0, -1);
+            const newMatchStates = state.matchStates.map((row, index) => 
+                index === state.currentRow ? calculateMatchStates(remainingGuess) : row
+            );
+            
+            return {
+                ...state,
+                currentGuess: remainingGuess,
+                matchStates: newMatchStates
+            };
+        }
 
-        case "ADD_ATTEMPT":
+        case "ADD_ATTEMPT": {
             if (isRowFull && isGuessFull || isCurrentRow) return state;
             if(isMatched) return {...initialState, isMatched};
             if(isOver) return {...initialState, isOver};
-            return {...state, attempts: newAttempts, currentGuess: [], currentRow: state.currentRow + 1};
+            
+            const newAttempts = state.attempts.map((row, index) => 
+                index === state.currentRow ? [...state.currentGuess] : row
+            );
+            
+            return {
+                ...state,
+                attempts: newAttempts,
+                currentGuess: [],
+                currentRow: state.currentRow + 1
+            };
+        }
 
         case "RESET":
             return initialState;
