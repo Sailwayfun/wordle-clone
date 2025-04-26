@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import Wrapper from './UI/Wrapper';
+import ThemeToggle from './UI/ThemeToggle';
 
 const HowToPlay = () => {
 
   return (
     <Wrapper>
       <div className="flex flex-col items-center space-y-6 py-8">
+        <ThemeToggle />
         <h2 className="text-3xl font-bold mb-4">How to Play <span className="font-heading" style={{viewTransitionName: "wordle-title"}}>Wordle 2</span></h2>
         <ol className="list-decimal list-inside text-lg space-y-2 text-left max-w-xl dark:bg-white dark:text-black dark:p-4 dark:rounded-lg">
           <li>Guess the hidden word in 6 tries.</li>
