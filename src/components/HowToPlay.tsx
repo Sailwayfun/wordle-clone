@@ -7,7 +7,7 @@ const HowToPlay = () => {
     <Wrapper>
       <div className="flex flex-col items-center space-y-6 py-8">
         <h2 className="text-3xl font-bold mb-4">How to Play <span className="font-heading" style={{viewTransitionName: "wordle-title"}}>Wordle 2</span></h2>
-        <ol className="list-decimal list-inside text-lg space-y-2 text-left max-w-xl">
+        <ol className="list-decimal list-inside text-lg space-y-2 text-left max-w-xl dark:bg-white dark:text-black dark:p-4 dark:rounded-lg">
           <li>Guess the hidden word in 6 tries.</li>
           <li>Each guess must be a valid 5-letter word. Hit the enter button to submit.</li>
           <li className="text-balance">After each guess, the color of the tiles will change to show how close your guess was to the word.</li>
