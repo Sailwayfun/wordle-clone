@@ -1,10 +1,12 @@
 import Wrapper from "./components/UI/Wrapper";
-import Puzzle from "./components/Puzzle";
+import Puzzle from "./components/puzzle";
 import Header from "./components/Header";
 import { useReducer, type Reducer, useEffect } from "react";
 import puzzleReducer, { initialState as initialAttempts, type State } from "./store/PuzzleReducer";
 import type { Action } from "./store/action";
 import toast, { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HowToPlay from './components/HowToPlay.tsx';
 
 function App() {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
@@ -54,15 +56,25 @@ function App() {
   return (
     <>
       <Toaster toastOptions={{duration: 200}}/>
-      <Header />
-      <Wrapper>
-        <Puzzle 
-          words={state.attempts}
-          currentGuess={state.currentGuess}
-          currentRow={state.currentRow}
-          matchStates={state.matchStates}
-        />
-      </Wrapper>
+      
+      <Router>
+        <Routes>
+          <Route path="/game" element={
+            <>
+              <Header />  
+              <Wrapper>
+                <Puzzle 
+                  words={state.attempts}
+                  currentGuess={state.currentGuess}
+                  currentRow={state.currentRow}
+                  matchStates={state.matchStates}
+                />
+              </Wrapper>
+            </>
+          } />
+          <Route path="/" element={<HowToPlay />} />
+        </Routes>
+      </Router>
     </>
   );
 }
