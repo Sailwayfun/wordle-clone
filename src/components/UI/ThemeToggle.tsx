@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { use } from "react";
 import ThemeContext from "../../context/ThemeContext";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 
 const ThemeToggle = () => {
-    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+    const { isDarkMode, toggleTheme } = use(ThemeContext);
 
     return (
         <div className="flex items-center gap-2">

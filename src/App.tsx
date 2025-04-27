@@ -1,15 +1,14 @@
 import Wrapper from "./components/UI/Wrapper";
 import Puzzle from "./components/puzzle";
 import Header from "./components/Header";
-import { useReducer, type Reducer, useEffect } from "react";
-import puzzleReducer, { initialState as initialAttempts, type State } from "./store/PuzzleReducer";
-import type { Action } from "./store/action";
+import { useReducer, useEffect } from "react";
+import puzzleReducer, { initialState as initialAttempts } from "./store/PuzzleReducer";
 import toast, { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HowToPlay from './components/HowToPlay.tsx';
 
 function App() {
-  const [state, dispatch] = useReducer<Reducer<State, Action>>(puzzleReducer, initialAttempts);
+  const [state, dispatch] = useReducer(puzzleReducer, initialAttempts);
 
   useEffect(() => {
     if(state.isMatched) {
