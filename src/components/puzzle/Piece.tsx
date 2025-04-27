@@ -10,7 +10,7 @@ const Piece = ({text, status}: PieceProps) => {
     "bg-green" : "bg-transparent";
     const guessingBorder:string = status === "guessing" ? "border-1 border-gray-500" : "";
     return (
-        <div className={`${bgColor} border border-gray-700 ${guessingBorder} aspect-square shadow rounded-md flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold`}>
+        <div className={`${bgColor} border border-gray-700 ${guessingBorder} aspect-square shadow rounded-md flex justify-center items-center text-3xl sm:text-6xl xl:text-8xl font-bold text-white`}>
             {text}
         </div>
     );
