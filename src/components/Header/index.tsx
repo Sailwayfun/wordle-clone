@@ -13,8 +13,8 @@ const Header = () => {
                 <Link to="/" viewTransition>
                     <span className="dark:text-white text-xl hover:text-bronze transition-colors">
                     <InfoIcon />
-                </span>
-            </Link>
+                    </span>
+                </Link>
             </div>
         </header>
     );
