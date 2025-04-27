@@ -5,8 +5,8 @@ export default function ThemeContextProvider({ children }: { children: React.Rea
     const { isDarkMode, toggleTheme } = useToggleLightDark();
 
     return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+        <ThemeContext value={{ isDarkMode, toggleTheme }}>
             {children}
-        </ThemeContext.Provider>
+        </ThemeContext>
     )
 }
